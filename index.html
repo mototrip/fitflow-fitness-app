@@ -14,7 +14,46 @@
   <link rel="stylesheet" href="styles.css">
   <title>FitFlow — Your Fitness Dashboard</title>
 </head>
-<body>
+<body class="auth-locked">
+
+  <section class="auth-screen" id="authScreen" aria-label="FitFlow account access">
+    <div class="auth-orbit auth-orbit-one"></div><div class="auth-orbit auth-orbit-two"></div>
+    <div class="auth-layout">
+      <div class="auth-pitch">
+        <div class="auth-logo"><span>✦</span> fitflow<span>.</span></div>
+        <div class="auth-pill">✧ YOUR PERSONAL FITNESS SPACE</div>
+        <h1>Better habits.<br><em>Stronger you.</em></h1>
+        <p>One beautiful place to track your workouts, hydration, habits and fitness progress — every single day.</p>
+        <div class="auth-perks"><div><span>✓</span> Daily habits & streaks</div><div><span>✓</span> Your fitness profile</div><div><span>✓</span> Workouts & progress charts</div></div>
+        <div class="auth-illustration"><div class="auth-mini-card"><span>THIS WEEK</span><div class="auth-bars"><i style="height:36%"></i><i style="height:53%"></i><i style="height:47%"></i><i style="height:77%"></i><i style="height:64%"></i><i style="height:94%"></i><i style="height:78%"></i></div><b>Keep showing up ✨</b></div><div class="auth-mini-ring">81%<small>done</small></div></div>
+      </div>
+      <div class="auth-form-wrap">
+        <div class="auth-card">
+          <div class="auth-card-heading"><div class="auth-card-icon">💪</div><div><span class="eyebrow">WELCOME TO FITFLOW</span><h2 id="authHeading">Create your account</h2><p id="authSubheading">Set up your fitness profile to get started.</p></div></div>
+          <div class="auth-tabs" role="tablist" aria-label="Account action"><button type="button" data-auth-mode="signup" aria-selected="true" class="active">Sign up</button><button type="button" data-auth-mode="login" aria-selected="false">Log in</button></div>
+          <form id="authForm" autocomplete="on">
+            <div id="signupFields">
+              <label class="field-label" for="signupName">Full name <span class="required-star">*</span></label><input class="field-input" id="signupName" name="name" placeholder="Your name" autocomplete="name" maxlength="60" required>
+            </div>
+            <label class="field-label" for="authEmail">Email address <span class="required-star">*</span></label><input class="field-input" id="authEmail" type="email" name="email" placeholder="you@example.com" autocomplete="email" maxlength="150" required>
+            <label class="field-label" for="authPassword">Password <span class="required-star">*</span></label><div class="auth-password-wrap"><input class="field-input" id="authPassword" type="password" name="password" placeholder="Minimum 8 characters" autocomplete="new-password" minlength="8" maxlength="128" required><button type="button" class="password-toggle" id="passwordToggle" aria-label="Show password">Show</button></div>
+            <div id="signupConfirmFields"><label class="field-label" for="authConfirm">Confirm password <span class="required-star">*</span></label><input class="field-input" id="authConfirm" type="password" name="confirm-password" placeholder="Re-enter password" autocomplete="new-password" minlength="8" maxlength="128" required></div>
+            <div id="signupProfileFields"><div class="auth-form-divider"><span>YOUR DETAILS</span><i></i></div><div class="auth-fields-grid">
+              <div><label class="field-label" for="signupAge">Age (years)</label><input class="field-input" id="signupAge" type="number" min="1" max="120" placeholder="e.g. 26" inputmode="numeric"></div>
+              <div><label class="field-label" for="signupGender">Gender</label><select class="field-input" id="signupGender"><option value="">Select</option><option value="Male">Male</option><option value="Female">Female</option><option value="Non-binary">Non-binary</option><option value="Other">Other</option><option value="Prefer not to say">Prefer not to say</option></select></div>
+              <div><label class="field-label" for="signupBlood">Blood group</label><select class="field-input" id="signupBlood"><option value="">Not sure / skip</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></div>
+              <div><label class="field-label" for="signupHeight">Height (cm)</label><input class="field-input" id="signupHeight" type="number" min="50" max="250" step="0.1" placeholder="e.g. 175" inputmode="decimal"></div>
+              <div class="auth-wide"><label class="field-label" for="signupWeight">Current weight (kg)</label><input class="field-input" id="signupWeight" type="number" min="10" max="500" step="0.1" placeholder="e.g. 72.5" inputmode="decimal"></div>
+            </div><label class="auth-migrate" id="migrateRow"><input type="checkbox" id="migrateExisting" checked> <span>Copy my existing FitFlow tracker data into this account</span></label></div>
+            <p class="auth-error" id="authError" role="alert" hidden></p>
+            <button class="btn btn-primary auth-submit" type="submit" id="authSubmit">Create local account <span>→</span></button>
+          </form>
+          <div class="auth-or"><span>or</span></div><button class="auth-guest" id="guestButton" type="button">Continue without an account →</button>
+          <p class="auth-privacy">🔒 <strong>Device-only login:</strong> accounts and fitness details stay in this browser. This is not a cloud account, and it does not sync across devices. Keep a backup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
       <div class="brand-wrap">
@@ -32,6 +71,7 @@
         <button class="nav-link" data-nav="habits" type="button"><span class="nav-glyph">▦</span><span>Habit calendar</span></button>
         <button class="nav-link" data-nav="workouts" type="button"><span class="nav-glyph">◈</span><span>Workout log</span></button>
         <button class="nav-link" data-nav="progress" type="button"><span class="nav-glyph">↗</span><span>Progress</span></button>
+        <button class="nav-link" data-nav="profile" type="button"><span class="nav-glyph">♙</span><span>My profile</span></button>
         <button class="nav-link" data-nav="settings" type="button"><span class="nav-glyph">⚙</span><span>Settings</span></button>
       </nav>
       <div class="side-spacer"></div>
@@ -42,7 +82,7 @@
     <div class="main-shell">
       <header class="topbar">
         <div class="topbar-left"><span class="crumb">FITNESS JOURNAL</span><span class="crumb-divider">/</span><strong id="pageCrumb">Dashboard</strong></div>
-        <div class="topbar-right"><span class="topbar-date" id="todayLabel"></span><button id="themeButton" type="button" class="icon-button" aria-label="Toggle dark mode" title="Dark mode">☾</button><button type="button" class="btn btn-primary top-add" data-open-habit>+ Add habit</button></div>
+        <div class="topbar-right"><span class="topbar-date" id="todayLabel"></span><button id="accountButton" type="button" class="account-button" title="Open my profile" aria-label="My profile"><span id="accountInitial">U</span></button><button id="themeButton" type="button" class="icon-button" aria-label="Toggle dark mode" title="Dark mode">☾</button><button type="button" class="btn btn-primary top-add" data-open-habit>+ Add habit</button></div>
       </header>
       <main id="pageRoot" class="page-root" aria-live="polite"></main>
       <footer class="footer">Made for better days <span>✦</span> FitFlow · Your data stays with you</footer>

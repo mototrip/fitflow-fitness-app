@@ -1,40 +1,26 @@
-# FitFlow — Fitness & Habit Tracker
+# FitFlow V2 — Fitness App (Local Sign-up & Fitness Profile)
 
-A fully functional, offline-friendly, mobile-responsive fitness web app inspired by the pastel monthly habit tracker reference.
+## New features
+- Beautiful responsive Sign up / Log in / guest screen.
+- Personal profile: name, age, gender, blood group, height (cm), and weight (kg).
+- Passwords are **not stored in plain text**: an 180,000-iteration PBKDF2-SHA256 salted verifier is used in browser storage.
+- Profile page with editable details. Updating weight also updates today's weigh-in in Progress.
+- Accounts keep tracker data separated per email **on the same browser / website origin**.
+- Existing FitFlow V1 data is preserved. Existing users open as guest automatically and can choose to copy their data during sign-up.
+- All V1 habits, workouts, calendar, hydration, charts, backup/import, dark mode, and offline support are retained.
 
-## Features
+## IMPORTANT — Privacy and authentication limitations
+**This is a local prototype, NOT a real online login system or secure authentication.** The account database and fitness data are kept in localStorage; technically skilled users with access to the device/browser can access or modify them. Passwords are hashed, but **fitness profile details and workouts are not encrypted**. Signing up on a different device does not log into the same account; this app does not sync data across devices and does not reset forgotten passwords. For a real multi-device sign-in use Firebase Authentication + Firestore (or a comparable backend) with security rules and privacy controls. GitHub Pages alone cannot provide this functionality.
 
-- Daily habit checklist with customizable habits, edit/delete, and a scrollable color-coded monthly tracking matrix
-- Daily and monthly completion scores, streaks, top habits, 7-day bars and a progress chart
-- Water consumption tracking in 250 ml steps with customizable daily target
-- Workout logging with date, type, duration, optional exercises (sets/reps/weight) and notes
-- Body-weight and optional waist tracking with trend chart
-- Dark mode, JSON backup import/export, full reset
-- Automatic saving in your browser (localStorage) and offline PWA support on an HTTPS site
-- No sign-up, server, third-party libraries or tracking
+Avoid entering real sensitive personal data into the demo if the browser or device is shared. Back up frequently (Settings > Export Backup). Private browsing or deleting website storage may erase accounts and data.
 
-## Preview on a PC
+## Upload to GitHub Pages
+1. Extract ZIP and open `FitFlow_Fitness_App_V2`.
+2. Open https://github.com/mototrip/fitflow-fitness-app
+3. Click **Add file > Upload files**. Upload **index.html, styles.css, app.js, manifest.webmanifest, sw.js, README.md and the entire icons folder** to the repository root. Existing files should be **replaced / updated**, and the icons files must be under `icons/`.
+4. Click **Commit changes**.
+5. Go to Settings > Pages; set Source = Deploy from a branch, Branch = main, Folder = /(root). Save.
+6. Open https://mototrip.github.io/fitflow-fitness-app/ and use a fresh reload once. If the previous offline PWA remains cached, close/reopen the app or clear site cache after exporting a backup.
 
-Unzip the package, then open `index.html` in your browser. Or for full PWA/service worker testing, run a local web server in this folder:
-
-```bash
-python -m http.server 8000
-```
-
-Open http://localhost:8000 in your browser.
-
-## Install as an iPhone app
-
-You **must first publish the folder to a site over HTTPS** (for example GitHub Pages or Netlify Drop; upload the unzipped files keeping their folder structure).
-
-Open the published HTTPS URL in Safari on iPhone, tap **Share → Add to Home Screen**, and confirm. After the first online visit, the app can open offline. Simply opening the HTML file from iPhone Files is for preview, not a reliable PWA installation path.
-
-## Data privacy & backups
-
-Data is only in the localStorage of the specific browser and site. It is not synced across devices; deleting website data, using private browsing, or changing the domain can lose your entries. **Export a JSON backup** in Settings periodically and import it if you move devices.
-
-The `index.html`, `styles.css`, and `app.js` files can all be customized. No build tools required.
-
-## Single-file preview
-
-Open `FitFlow_Standalone_Preview.html` on your laptop to try the complete app without a server. It stores data in the browser for that file (browser support varies). This standalone page is **not** the recommended iPhone PWA installation; deploy the folder version over HTTPS for that.
+## Testing locally
+Run `python -m http.server 8000` from the extracted folder, then open http://localhost:8000. Sign up, edit profile, log out, and log back in using the **same device/browser**. Crypto requires HTTPS or localhost; signup/login may not work from a file:// preview.
